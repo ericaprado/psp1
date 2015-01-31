@@ -7,6 +7,8 @@ package edu.uniandes.ecos;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -15,7 +17,9 @@ import java.io.FileInputStream;
  */
 public class ProgramLOCCounter {
     
-    public void CountClasses(String path){
+    public List<ClassInfo> CountClasses(String path){
+        
+        List<ClassInfo> listResults = new ArrayList<ClassInfo>();
         
         try {
                        
@@ -31,10 +35,15 @@ public class ProgramLOCCounter {
                 File file = listFiles[i];
                 
                 if (file.isDirectory()){
-                    this.CountClasses(file.getAbsolutePath());
+                    
+                    List<ClassInfo> listResultsDir = this.CountClasses(file.getAbsolutePath());
+                    
+                    if(!listResultsDir.isEmpty())
+                        listResults.addAll(listResultsDir);
+                    
                 }else{                    
                     FileInputStream fileIS = new FileInputStream(file);
-                    printResults(counter.countLOCClass(file.getAbsolutePath(), fileIS));
+                    listResults.add(counter.countLOCClass(file.getAbsolutePath(), fileIS));
                 }                  
              }
             
@@ -42,15 +51,9 @@ public class ProgramLOCCounter {
             System.out.println(e.getMessage());
         }
         
-    
+    return listResults;
     }
     
-    private static void printResults (ClassInfo classInfo){
-        
-        System.out.println("Clase:    " + classInfo.getPath());
-        System.out.println("Número de Métodos:    " + classInfo.getMethods());
-        System.out.println("Número de Líneas:    " + classInfo.getLinesOfCode());
-        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-    }
+    
     
 }
