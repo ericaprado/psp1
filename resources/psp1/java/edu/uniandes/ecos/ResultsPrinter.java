@@ -30,30 +30,21 @@ public class ResultsPrinter {
     public static String printWeb(List<ClassInfo> list, String programName){
         
         String resultHtml = "";
-        int totalLines = 0;
-               
-            
+        
         for (Iterator<ClassInfo> iterator = list.iterator(); iterator.hasNext();) {
             ClassInfo classInfo = (ClassInfo)iterator.next();
             
-            resultHtml += "</br>--------------------------------------------------------------------";
-            resultHtml += "</br>" + "Clase:    " + classInfo.getPath();
-            resultHtml += "</br>" + "Número de Métodos:    " + classInfo.getMethods();
-            resultHtml += "</br>" + "Número de Líneas:    " + classInfo.getLinesOfCode();
-                     
-            resultHtml += "</HTML>";
-            
-            totalLines += classInfo.getLinesOfCode();
+            resultHtml = "<HTML>";
+            resultHtml = resultHtml + "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++";
+            resultHtml = resultHtml + "CONTEO DE LINEAS PROGRAMA: " + programName;
+            resultHtml = resultHtml + "</br>" + "Clase:    " + classInfo.getPath();
+            resultHtml = resultHtml + "</br>" + "Número de Métodos:    " + classInfo.getMethods();
+            resultHtml = resultHtml + "</br>" + "Número de Líneas:    " + classInfo.getLinesOfCode();
+            resultHtml = resultHtml + "</br>" + "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++";            
+            resultHtml = resultHtml + "</HTML>";
         }
-        resultHtml += "</br>++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++";
         
-        String infoProgram = "";
-        infoProgram += "<HTML>";
-        infoProgram +=  "</br>++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++";
-        infoProgram +=  "</br>CONTEO DE LINEAS PROGRAMA: " + programName;
-        infoProgram +=  "</br>TOTAL LINEAS PROGRAMA: " + totalLines;
-        
-        return infoProgram + resultHtml;
+        return resultHtml;
     }
     
 }

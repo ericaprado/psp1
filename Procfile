@@ -1,2 +1,2 @@
-web:    java -cp target/classes:target/dependency/* Main
-web1:    java -cp target/classes;target/dependency/* Main
+web:    java -cp target/classes:target/dependency/* edu/uniandes/ecos/App
+web1:    java -cp target/classes;target/dependency/* edu/uniandes/ecos/App
